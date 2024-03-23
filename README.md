@@ -12,9 +12,9 @@ Getting Started
 
 Prerequisites
 
--Arduino or ESP32 microcontroller
+-Arduino* or ESP32 microcontroller
 -PWM-compatible fans
--Dallas temperature probe
+-Dallas temperature probe (Optional)
 -Compatible computer with CPU temperature monitoring capabilities
 
 Installation
