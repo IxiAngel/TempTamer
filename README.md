@@ -1,11 +1,11 @@
 TempTamer: The Cool CPU Commander
 
-Welcome to TempTamer, your ultimate solution for controlling CPU temperature and fan speeds with finesse. Say goodbye to overheating headaches and noisy fans – TempTamer is here to keep your system running smoothly and quietly.
+Welcome to TempTamer, your ultimate solution for controlling CPU temperature and fan speeds with finesse. Say goodbye to stability issues and system freezes – TempTamer is here to keep your system running smoothly and quietly.
 
 Features
-Dynamic CPU Clock Control: TempTamer intelligently adjusts CPU clock speeds based on real-time temperature readings, ensuring optimal performance while keeping temperatures in check.
+Dynamic CPU Clock Control: TempTamer intelligently adjusts CPU clock speeds based on real-time temperature readings, ensuring optimal performance while keeping temperatures and CPU stability in check.
 
-PWM Fan Control: Take full control of your computer's PWM fans using Arduino or ESP32, effortlessly managing fan speeds for optimal cooling efficiency.
+PWM Fan Control: Take full control of your computer's PWM fans and CPU frequency using Arduino or ESP32, effortlessly managing fan speeds for optimal cooling efficiency.
 
 
 Getting Started
