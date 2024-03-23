@@ -1,1 +1,1 @@
-# TempTamer
+# TempTamer: The Cool CPU Commander 
