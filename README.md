@@ -41,39 +41,39 @@ Take full control of your computer's fans and CPU frequency, effortlessly managi
 
 ### Configuration File Template
 
-# TempTamer Configuration File
+#### TempTamer Configuration File
 
-# Script identifier, useful for tagging script instances when sending a critical temperature email.
+##### Script identifier, useful for tagging script instances when sending a critical temperature email.
 identifier=Your Computer
 
-# Send email when specified critical temperature is reached.
+##### Send email when specified critical temperature is reached.
 criticalTemperature=95
 
-# E-Mail address to send to when critical temperature is reached.
+##### E-Mail address to send to when critical temperature is reached.
 email=
 
-# Fan Controller Module Serial Device path, if it is used.
+##### Fan Controller Module Serial Device path, if it is used.
 fanSerialDevice=/dev/ttyUSB0
 
-# How many fans are attached to the Fan Controller Module.
+##### How many fans are attached to the Fan Controller Module.
 noOfFans=6
 
-# Command to read the CPU1 temperature with.
+##### Command to read the CPU1 temperature with.
 getCpu1TempCmd=</sys/class/thermal/thermal_zone1/temp
 
-# Command to read the CPU2 temperature with.
+##### Command to read the CPU2 temperature with.
 getCpu2TempCmd=</sys/class/thermal/thermal_zone2/temp
 
-# Divide obtained temperature from above commands with this divisor.
+##### Divide obtained temperature from above commands with this divisor.
 cpuTempDivisor=1000
 
-# Minimum cool down in seconds.
+##### Minimum cool down in seconds.
 minCoolDown=3
 
-# CPU Frequency and Fan curves.
-# They must start with the highest temperature and end with
-# the lowest temperature.
-# Temperature, CPU Frequency, Timeout, FanBits=FanSpeed, ...
+##### CPU Frequency and Fan curves.
+##### They must start with the highest temperature and end with
+##### the lowest temperature.
+##### Temperature, CPU Frequency, Timeout, FanBits=FanSpeed, ...
 curve=101,1800000,0,0=100
 curve=100,2100000,2,0=100
 curve=99,2700000,4,0=100
