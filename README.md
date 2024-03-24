@@ -179,10 +179,20 @@ curve=0,3700000,33,0=20
 
 ### Serial PC App
 
-1. Launch TempTamer on your computer.
-2. Monitor CPU temperatures and fan speeds in real-time.
-3. Adjust fan speeds manually or let TempTamer automatically optimize settings.
-4. Stay cool and productive while TempTamer takes care of the rest!
+TempTamer comes with a companion Serial PC app for convenient monitoring and control of CPU temperatures and fan speeds. The app offers the following features:
+
+1. **Real-Time Monitoring:** Monitor CPU temperatures and fan speeds in real-time.
+2. **Manual Control:** Adjust fan speeds manually to meet specific cooling requirements.
+3. **Automatic Optimization:** Let TempTamer automatically optimize settings based on temperature readings.
+4. **Email Notifications:** Receive email notifications when critical temperatures are reached, ensuring timely intervention.
+5. **Safety Features:** The app includes safety features to prevent hardware damage due to inadequate cooling or incorrect configurations.
+
+To use the Serial PC app:
+
+1. **Launch TempTamer on your computer:** Ensure TempTamer is running on your system.
+2. **Connect via Serial Communication:** Use serial communication software to establish a connection with TempTamer.
+3. **Monitor and Control:** Monitor CPU temperatures and fan speeds, and adjust settings as needed.
+4. **Stay Informed:** Stay informed about critical temperature events via email notifications.
 
 ## Safety Considerations
 
