@@ -179,10 +179,10 @@ curve=0,3700000,33,0=20
 
 ### Serial PC App
 
-TempTamer comes with a companion Serial PC app for convenient monitoring and control of CPU temperatures and fan speeds. The app offers the following features:
+TempTamer comes with a companion linux app for convenient monitoring and control of CPU temperatures, fan and clock speeds. The app offers the following features:
 
-1. **Real-Time Monitoring:** Monitor CPU temperatures and fan speeds in real-time.
-2. **Manual Control:** Adjust fan speeds manually to meet specific cooling requirements.
+1. **Real-Time Monitoring:** Monitor CPU temperatures, clock and fan speeds in real-time.
+2. **Manual Control:** Adjust fan speeds and CPU clock manually to meet specific cooling requirements.
 3. **Automatic Optimization:** Let TempTamer automatically optimize settings based on temperature readings.
 4. **Email Notifications:** Receive email notifications when critical temperatures are reached, ensuring timely intervention.
 5. **Safety Features:** The app includes safety features to prevent hardware damage due to inadequate cooling or incorrect configurations.
