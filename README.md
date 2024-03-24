@@ -14,10 +14,8 @@ Take full control of your computer's fans and CPU frequency, effortlessly managi
 - Support for single and multiple fan configurations.
 - *External temp. probe. (*Optional. Uses external library OneWire.h and DallasTemperature.h)
   
-
-### Serial Comunication
+### Serial Communication
 - Ability to set configuration options via serial communication.
-
 
 ## Getting Started
 
@@ -27,7 +25,7 @@ Take full control of your computer's fans and CPU frequency, effortlessly managi
 - Dallas DS18B20 temperature probe (Optional)
 - Compatible computer with CPU temperature monitoring capabilities
 
-  *Arduino and ESP8266(D1) use SoftPWM, while ESP32 uses more accurate LEDC for PWM fan controll.
+*Arduino and ESP8266(D1) use SoftPWM, while ESP32 uses more accurate LEDC for PWM fan control.
 
 ### Installation
 1. Clone the TempTamer repository to your local machine.
@@ -37,11 +35,11 @@ Take full control of your computer's fans and CPU frequency, effortlessly managi
 5. Configure TempTamer settings according to your preferences.
 6. Run TempTamer and enjoy The Cool CPU Commander.
 
-# Flashing Procedure for Arduino or ESP32 .bin Files
+## Flashing Procedure for Arduino or ESP32 .bin Files
 
 This repository provides instructions for flashing .bin files onto Arduino or ESP32 microcontrollers. Follow the steps below to successfully flash the .bin files onto your device.
 
-## Prerequisites
+### Prerequisites
 
 Before you begin, ensure you have the following:
 
@@ -49,54 +47,38 @@ Before you begin, ensure you have the following:
 - USB cable to connect your microcontroller to your computer.
 - The .bin file(s) you intend to flash onto your device.
 
-## Procedure
+### Procedure
 
-### 1. Connect your Microcontroller
+1. **Connect your Microcontroller**: Connect your Arduino or ESP32 microcontroller to your computer using the USB cable.
 
-Connect your Arduino or ESP32 microcontroller to your computer using the USB cable.
+2. **Open Arduino IDE or ESP-IDF Terminal**: Open the Arduino IDE or the ESP-IDF terminal, depending on your microcontroller.
 
-### 2. Open Arduino IDE or ESP-IDF Terminal
+3. **Select the Correct Port**: In the Arduino IDE, navigate to `Tools > Port` and select the appropriate port for your microcontroller.
 
-Open the Arduino IDE or the ESP-IDF terminal, depending on your microcontroller.
+4. **Enter Bootloader Mode (for ESP32 Only)**: If you're flashing a .bin file onto an ESP32 microcontroller, you might need to enter bootloader mode. Usually, this involves holding down the BOOT button while resetting the device.
 
-### 3. Select the Correct Port
+5. **Flash the .bin File**:
 
-In the Arduino IDE, navigate to `Tools > Port` and select the appropriate port for your microcontroller.
+   - **Arduino IDE**:
+     1. In the Arduino IDE, navigate to `Sketch > Include Library > Add .ZIP Library`.
+     2. Select the .zip file containing the .bin file you want to flash.
+     3. Once the library is added, navigate to `File > Examples` and select the library you just added.
+     4. Open the example sketch and verify/upload it to your microcontroller.
 
-### 4. Enter Bootloader Mode (for ESP32 Only)
+   - **ESP-IDF Terminal**:
+     1. Navigate to the directory containing the .bin file using the terminal.
+     2. Use the `esptool.py` utility to flash the .bin file onto your ESP32 microcontroller. The command typically looks like this:
 
-If you're flashing a .bin file onto an ESP32 microcontroller, you might need to enter bootloader mode. Usually, this involves holding down the BOOT button while resetting the device.
+      ```
+      esptool.py --chip esp32 --port /dev/ttyUSB0 write_flash -z 0x1000 your_firmware.bin
+      ```
 
-### 5. Flash the .bin File
+      Replace `/dev/ttyUSB0` with the appropriate port for your microcontroller, and `your_firmware.bin` with the name of your .bin file.
 
-#### Arduino IDE
+6. **Verify**: Once the flashing process is complete, verify that the .bin file has been successfully flashed onto your microcontroller.
 
-1. In the Arduino IDE, navigate to `Sketch > Include Library > Add .ZIP Library`.
-2. Select the .zip file containing the .bin file you want to flash.
-3. Once the library is added, navigate to `File > Examples` and select the library you just added.
-4. Open the example sketch and verify/upload it to your microcontroller.
+7. **Reset (if necessary)**: Reset your microcontroller if required to start running the flashed program.
 
-#### ESP-IDF Terminal
-
-1. Navigate to the directory containing the .bin file using the terminal.
-2. Use the `esptool.py` utility to flash the .bin file onto your ESP32 microcontroller. The command typically looks like this:
-
-   ```
-   esptool.py --chip esp32 --port /dev/ttyUSB0 write_flash -z 0x1000 your_firmware.bin
-   ```
-
-   Replace `/dev/ttyUSB0` with the appropriate port for your microcontroller, and `your_firmware.bin` with the name of your .bin file.
-
-### 6. Verify
-
-Once the flashing process is complete, verify that the .bin file has been successfully flashed onto your microcontroller.
-
-### 7. Reset (if necessary)
-
-Reset your microcontroller if required to start running the flashed program.
-&nbsp;
-&nbsp;
-&nbsp;
 ## Troubleshooting
 
 - If you encounter any errors during the flashing process, double-check your connections and ensure you're using the correct port and commands.
@@ -110,40 +92,40 @@ Following these steps should allow you to successfully flash .bin files onto you
 
 The `config.h` file contains various configurations for the TempTamer Fan Controller Module. Here's a breakdown of each configuration option:
 
-## Macro Definitions
+### Macro Definitions
 
-### USE_LEDC
+#### USE_LEDC
 Defines whether the LEDC module is used for controlling fan speeds.
 
-## Fan Ports
+#### Fan Ports
 
 ```cpp
 const int FANS[6] = { GPIO_NUM_19, GPIO_NUM_18, GPIO_NUM_5, GPIO_NUM_17, GPIO_NUM_16, GPIO_NUM_4 };
 ```
 Specifies the GPIO pins used for connecting the fans. Modify this array to match your hardware configuration.
 
-## Initial Fan Speed
+#### Initial Fan Speed
 
 ```cpp
 const int INITIAL_FAN_SPEED = 50;
 ```
 Sets the initial speed of the fans when the module is powered on or reset. The value ranges from 0 to 100.
 
-## Minimum Fan Speed
+#### Minimum Fan Speed
 
 ```cpp
 int MIN_FAN_SPEED = 10;
 ```
 Prevents setting fan speeds below this threshold to ensure proper airflow. Adjust as needed.
 
-## Emergency Timeout
+#### Emergency Timeout
 
 ```cpp
 int EMERGENCY_TIMEOUT = 60;
 ```
 If no data is received for this duration (in seconds), all fans will be set to maximum speed as a safety measure.
 
-## Temperature Sensor
+#### Temperature Sensor
 
 ```cpp
 int TEMP_SENSOR_PIN = GPIO_NUM_13;
@@ -170,10 +152,10 @@ Modify these configurations according to your specific requirements and hardware
 
 This section provides insights into configuring the fan controller module according to your specific needs and hardware setup.
 
-##### CPU Frequency and Fan curves.
-##### They must start with the highest temperature and end with
-##### the lowest temperature.
-##### Temperature, CPU Frequency, Timeout, FanBits=FanSpeed, ...
+CPU Frequency and Fan curves.
+They must start with the highest temperature and end with
+the lowest temperature.
+Temperature, CPU Frequency, Timeout, FanBits=FanSpeed, ...
 curve=101,1800000,0,0=100
 curve=100,2100000,2,0=100
 curve=99,2700000,4,0=100
@@ -187,25 +169,23 @@ curve=75,3700000,25,9=45,36=60
 curve=65,3700000,30,9=30,36=40
 curve=0,3700000,33,0=20
 
+### Manual Usage
 
-###Manual
 1. Launch the serial monitor in the Arduino IDE or any serial communication software.
 2. Send commands in the format "{command,param1,param2,...}" to control fan speeds and retrieve temperature readings.
 3. Refer to the provided commands for setting fan speeds, retrieving temperatures, and configuring options.
 
-###Serial PC app
+### Serial PC App
 
 1. Launch TempTamer on your computer.
 2. Monitor CPU temperatures and fan speeds in real-time.
 3. Adjust fan speeds manually or let TempTamer automatically optimize settings.
 4. Stay cool and productive while TempTamer takes care of the rest!
 
-
-
-
 ## Safety Considerations
+
 - Ensure that the fan controller module is correctly connected and configured to avoid damaging hardware due to inadequate cooling.
-- Use caution when defining fan speed curves and temperature thresholds to prevent overheating and oscilations.
+- Use caution when defining fan speed curves and temperature thresholds to prevent overheating and oscillations.
 
 ## Contributions
 
