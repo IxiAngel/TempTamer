@@ -1,0 +1,46 @@
+# TempTamer Configuration File
+
+# Script identifier, useful for tagging script instances when
+# sending a critical temperature email.
+identifier=Your Computer
+
+# Send email when specified critical temperature is reached.
+criticalTemperature=95
+
+# E-Mail address to send to when critical temperature is reached.
+email=
+
+# Fan Controller Module Serial Device path, if it is used.
+fanSerialDevice=/dev/ttyUSB0
+
+# How many fans are attached to the Fan Controller Module.
+noOfFans=6
+
+# Command to read the CPU1 temperature with.
+getCpu1TempCmd=</sys/class/thermal/thermal_zone1/temp
+
+# Command to read the CPU2 temperature with.
+getCpu2TempCmd=</sys/class/thermal/thermal_zone2/temp
+
+# Divide obtained temperature from above commands with this divisor.
+cpuTempDivisor=1000
+
+# Minimum cool down in seconds.
+minCoolDown=3
+
+# CPU Frequency and Fan curves.
+# They must start with the highest temperature and end with
+# the lowest temperature.
+# Temperature, CPU Frequency, Timeout, FanBits=FanSpeed, ...
+curve=101,1800000,0,0=100
+curve=100,2100000,2,0=100
+curve=99,2700000,4,0=100
+curve=98,3000000,6,0=100
+curve=97,3200000,8,0=100
+curve=96,3300000,10,0=100
+curve=90,3700000,12,9=90,36=100
+curve=85,3700000,15,9=80,36=100
+curve=80,3700000,20,9=50,36=90
+curve=75,3700000,25,9=45,36=60
+curve=65,3700000,30,9=30,36=40
+curve=0,3700000,33,0=20
