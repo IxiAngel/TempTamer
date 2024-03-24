@@ -35,9 +35,9 @@ Take full control of your computer's fans and CPU frequency, effortlessly managi
 5. Configure TempTamer settings according to your preferences.
 6. Run TempTamer and enjoy The Cool CPU Commander.
 
-## Flashing Procedure for Arduino or ESP32 .bin Files
+## Flashing Procedure for Arduino or ESP32
 
-This repository provides instructions for flashing .bin files onto Arduino or ESP32 microcontrollers. Follow the steps below to successfully flash the .bin files onto your device.
+Follow the steps below to successfully flash the .bin files onto your device.
 
 ### Prerequisites
 
@@ -156,6 +156,7 @@ CPU Frequency and Fan curves.
 They must start with the highest temperature and end with
 the lowest temperature.
 Temperature, CPU Frequency, Timeout, FanBits=FanSpeed, ...
+```cpp
 curve=101,1800000,0,0=100
 curve=100,2100000,2,0=100
 curve=99,2700000,4,0=100
@@ -168,6 +169,7 @@ curve=80,3700000,20,9=50,36=90
 curve=75,3700000,25,9=45,36=60
 curve=65,3700000,30,9=30,36=40
 curve=0,3700000,33,0=20
+```
 
 ### Manual Usage
 
