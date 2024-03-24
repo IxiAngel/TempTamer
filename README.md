@@ -79,7 +79,7 @@ Before you begin, ensure you have the following:
 
 7. **Reset (if necessary)**: Reset your microcontroller if required to start running the flashed program.
 
-## Troubleshooting
+### Troubleshooting
 
 - If you encounter any errors during the flashing process, double-check your connections and ensure you're using the correct port and commands.
 - Ensure that your .bin file is compatible with your microcontroller and that it has been generated correctly.
