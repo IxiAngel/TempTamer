@@ -39,36 +39,69 @@ Take full control of your computer's fans and CPU frequency, effortlessly managi
 
 ## Usage
 
-### Configuration File Template
+### Configurations
 
-#### TempTamer Configuration File
+The `config.h` file contains various configurations for the TempTamer Fan Controller Module. Here's a breakdown of each configuration option:
 
-##### Script identifier, useful for tagging script instances when sending a critical temperature email.
-identifier=Your Computer
+## Macro Definitions
 
-##### Send email when specified critical temperature is reached.
-criticalTemperature=95
+### USE_LEDC
+Defines whether the LEDC module is used for controlling fan speeds.
 
-##### E-Mail address to send to when critical temperature is reached.
-email=
+## Fan Ports
 
-##### Fan Controller Module Serial Device path, if it is used.
-fanSerialDevice=/dev/ttyUSB0
+```cpp
+const int FANS[6] = { GPIO_NUM_19, GPIO_NUM_18, GPIO_NUM_5, GPIO_NUM_17, GPIO_NUM_16, GPIO_NUM_4 };
+```
+Specifies the GPIO pins used for connecting the fans. Modify this array to match your hardware configuration.
 
-##### How many fans are attached to the Fan Controller Module.
-noOfFans=6
+## Initial Fan Speed
 
-##### Command to read the CPU1 temperature with.
-getCpu1TempCmd=</sys/class/thermal/thermal_zone1/temp
+```cpp
+const int INITIAL_FAN_SPEED = 50;
+```
+Sets the initial speed of the fans when the module is powered on or reset. The value ranges from 0 to 100.
 
-##### Command to read the CPU2 temperature with.
-getCpu2TempCmd=</sys/class/thermal/thermal_zone2/temp
+## Minimum Fan Speed
 
-##### Divide obtained temperature from above commands with this divisor.
-cpuTempDivisor=1000
+```cpp
+int MIN_FAN_SPEED = 10;
+```
+Prevents setting fan speeds below this threshold to ensure proper airflow. Adjust as needed.
 
-##### Minimum cool down in seconds.
-minCoolDown=3
+## Emergency Timeout
+
+```cpp
+int EMERGENCY_TIMEOUT = 60;
+```
+If no data is received for this duration (in seconds), all fans will be set to maximum speed as a safety measure.
+
+## Temperature Sensor
+
+```cpp
+int TEMP_SENSOR_PIN = GPIO_NUM_13;
+```
+Specifies the GPIO pin used for the temperature sensor. Use -1 to disable temperature monitoring.
+
+### Optional Settings:
+
+- **TEMP_SENSOR_MIN_TEMP**: Set fans to maximum speed if temperature drops to or below this value (in Celsius).
+- **TEMP_SENSOR_MAX_TEMP**: Set fans to maximum speed if temperature reaches or exceeds this value (in Celsius).
+- **TEMP_SENSOR_MAX_TEMP_FAN_SPEED**: Set fans to a specific speed when the temperature exceeds the maximum threshold.
+
+Example:
+
+```cpp
+// Enable temperature sensor and set temperature thresholds
+#define TEMP_SENSOR_PIN GPIO_NUM_13
+const int TEMP_SENSOR_MIN_TEMP = 20;  // Set fans to max speed if temperature drops below 20°C
+const int TEMP_SENSOR_MAX_TEMP = 80;  // Set fans to max speed if temperature exceeds 80°C
+const int TEMP_SENSOR_MAX_TEMP_FAN_SPEED = 90;  // Set fans to 90% speed when temperature exceeds 80°C
+```
+
+Modify these configurations according to your specific requirements and hardware setup.
+
+This section provides insights into configuring the fan controller module according to your specific needs and hardware setup.
 
 ##### CPU Frequency and Fan curves.
 ##### They must start with the highest temperature and end with
