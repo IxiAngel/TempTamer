@@ -94,7 +94,9 @@ Once the flashing process is complete, verify that the .bin file has been succes
 ### 7. Reset (if necessary)
 
 Reset your microcontroller if required to start running the flashed program.
-
+&nbsp;
+&nbsp;
+&nbsp;
 ## Troubleshooting
 
 - If you encounter any errors during the flashing process, double-check your connections and ensure you're using the correct port and commands.
