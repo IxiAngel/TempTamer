@@ -1,4 +1,4 @@
-// Copyright (C) 2024 IxiAngel
+// Copyright (C) 2024 TempTamer Developers
 //
 // TempTamer Fan Controller Module is free software: you can redistribute it and/or modify
 // it under the terms of the MIT License as published

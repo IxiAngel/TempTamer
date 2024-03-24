@@ -2,7 +2,7 @@
 
 # MIT License
 #
-# Copyright (c) 2024 IxiAngel
+# Copyright (c) 2024 TempTamer Developers
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -62,14 +62,14 @@ FANS_UPDATED=0
 
 setFrequency()
 {
-  if [ $LAST_FREQ -ne $1 ]; then
-	if [ $LAST_FREQ -gt $1 ] || [ $(($SECONDS - $LAST_FREQ_UPDATE)) -ge $2 ]; then
-	  LAST_FREQ=$1
-	  LAST_FREQ_UPDATE=$(($MIN_COOL_DOWN + $SECONDS - $2))
-	  ./setCpuFrequency.sh 0 $1
-	  ./setCpuFrequency.sh 1 $1
+	if [ $LAST_FREQ -ne $1 ]; then
+		if [ $LAST_FREQ -gt $1 ] || [ $(($SECONDS - $LAST_FREQ_UPDATE)) -ge $2 ]; then
+			LAST_FREQ=$1
+			LAST_FREQ_UPDATE=$(($MIN_COOL_DOWN + $SECONDS - $2))
+			./setCpuFrequency.sh 0 $1
+			./setCpuFrequency.sh 1 $1
+		fi
 	fi
-  fi
 }
 
 setFanSpeed()
@@ -432,6 +432,12 @@ init()
 	done
 	echo
 
+	local temp1=$(($(eval "$GET_CPU1_TEMP_CMD") / $CPU_TEMP_DIVISOR))
+	local temp2=$(($(eval "$GET_CPU2_TEMP_CMD") / $CPU_TEMP_DIVISOR))
+	echo "Current Temperatures - Temp1: $temp1°C, Temp2: $temp2°C"
+	showCurrentCoreFrequencies
+
+
 	# Set Baudrate to 115200
 	if [ "$FAN_SERIAL_DEV" != "" ]; then
 		if [ -c $FAN_SERIAL_DEV ]; then
@@ -447,6 +453,13 @@ outputArray()
 	for i in "${!arr[@]}"; do 
 		printf "%s=(%s); " "$i" "${arr[$i]}"
 	done
+}
+
+showCurrentCoreFrequencies()
+{
+	echo "Current core frequencies:"
+	cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq | sort | uniq -c
+	echo
 }
 
 startMonitor()
@@ -502,9 +515,7 @@ startMonitor()
 	if [ $curFreq -ne $LAST_FREQ ]; then
 	  changed=1
 	  echo "CPU Frequency changed at Temp1: $temp1°C, Temp2: $temp2°C"
-	  echo "Current core frequencies:"
-	  cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq | sort | uniq -c
-	  echo
+	  showCurrentCoreFrequencies
 	  echo
 	fi
 
