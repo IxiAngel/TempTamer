@@ -201,33 +201,28 @@ The TempTamer Fan Controller Module is a crucial component of the TempTamer syst
 #### Functionality Overview
 
 1. **`void setFanSpeed(int fanIndex, int percent)`:**
-   - Description: Sets the speed of a single fan based on the provided percentage.
-   - Parameters:
+   - Sets the speed of a single fan based on the provided percentage.
      - `fanIndex`: Index of the fan whose speed needs to be set.
      - `percent`: Speed percentage (0-100) to set for the fan.
 
 2. **`void setMultiFanSpeed(long fanBits, int percent)`:**
-   - Description: Sets the speed of multiple fans based on a bitmask and the provided percentage.
-   - Parameters:
+   - Sets the speed of multiple fans based on a bitmask and the provided percentage.
      - `fanBits`: Bitmask representing which fans to set the speed for.
      - `percent`: Speed percentage (0-100) to set for the selected fans.
 
 3. **`void initFans(int percent)`:**
-   - Description: Initializes the fans, setting them to a specified initial speed percentage.
-   - Parameters:
+   - Initializes the fans, setting them to a specified initial speed percentage.
      - `percent`: Initial speed percentage (0-100) for all fans.
 
 4. **`boolean handleFanCommand(String data)`:**
-   - Description: Handles a single fan command received via serial communication.
-   - Parameters:
+   - Handles a single fan command received via serial communication.
      - `data`: String containing the fan command in the format "{fanIndex},{fanSpeed}".
-   - Returns: `true` if the command was successfully processed, `false` otherwise.
+   - `true` if the command was successfully processed, `false` otherwise.
 
 5. **`boolean handleMultiFanCommand(String data)`:**
-   - Description: Handles a multi-fan command received via serial communication.
-   - Parameters:
+   - Handles a multi-fan command received via serial communication.
      - `data`: String containing the multi-fan command in the format "{fanBits=FanSpeed,...}".
-   - Returns: `true` if the command was successfully processed, `false` otherwise.
+   - `true` if the command was successfully processed, `false` otherwise.
 
 ## Safety Considerations
 
