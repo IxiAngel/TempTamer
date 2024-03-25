@@ -182,10 +182,10 @@ curve=0,3700000,33,0=20
 2. Send commands in the format "{command,param1,param2,...}" to control fan speeds and retrieve temperature readings.
 3. Refer to the provided commands for setting fan speeds, retrieving temperatures, and configuring options.
 
-### Serial PC App
+### Linux Bash Script
 
-TempTamer comes with a companion linux app for convenient monitoring and control of CPU temperatures, fan and clock speeds. The app offers the following features:
-
+TempTamer comes with a companion linux script for convenient monitoring and control of CPU temperatures, fan and clock speeds.
+#### Features:
 1. **Real-Time Monitoring:** Monitor CPU temperatures, clock and fan speeds in real-time.
 2. **Manual Control:** Adjust fan speeds and CPU clock manually to meet specific cooling requirements.
 3. **Automatic Optimization:** Let TempTamer automatically optimize settings based on temperature readings.
