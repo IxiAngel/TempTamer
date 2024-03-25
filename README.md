@@ -17,6 +17,11 @@ Take full control of your computer's fans and CPU frequency, effortlessly managi
 ### Serial Communication
 - Ability to set configuration options via serial communication.
 
+### Linux Bash Script
+- Constantly monitors the temperatures of CPU cores using provided commands for temperature retrieval (`getCpu1TempCmd` and `getCpu2TempCmd`), and adjusts CPU frequencies and fan speeds according to predefined temperature curves specified in the configuration file.
+
+This script is particularly useful for systems that require dynamic temperature management, such as servers, workstations, or any Linux-based system where temperature control is crucial for stability and longevity.
+
 ## Getting Started
 
 ### Prerequisites
