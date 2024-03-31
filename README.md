@@ -84,13 +84,6 @@ Before you begin, ensure you have the following:
 
 7. **Reset (if necessary)**: Reset your microcontroller if required to start running the flashed program.
 
-### Troubleshooting
-
-- If you encounter any errors during the flashing process, double-check your connections and ensure you're using the correct port and commands.
-- Ensure that your .bin file is compatible with your microcontroller and that it has been generated correctly.
-
-Following these steps should allow you to successfully flash .bin files onto your Arduino or ESP32 microcontroller. If you encounter any issues, refer to the troubleshooting section or consult the documentation specific to your device or development environment.
-
 ## Usage
 
 ### Configurations
