@@ -1,45 +1,73 @@
-## Flashing Procedure for Arduino or ESP32
+# TempTamer Hardware Module
 
-Follow the steps below to successfully flash the .bin files onto your device.
+## About
 
-### Prerequisites
+The TempTamer Hardware Module complements the TempTamer Shell Script, providing fan speed control capabilities based on real-time temperature readings. With this module, you can efficiently manage CPU temperatures and fan speeds for optimal system performance and reliability.
 
-Before you begin, ensure you have the following:
+## Quick Prep/Start from Pre-built Binaries
 
-- [Arduino IDE](https://www.arduino.cc/en/software) or [ESP-IDF Toolchain](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#installation-step-by-step) installed on your system.
-- USB cable to connect your microcontroller to your computer.
-- The .bin file(s) you intend to flash onto your device.
+1. Download the pre-built binaries for your platform from the TempTamer GitHub releases page.
+2. Connect the TempTamer Hardware Module to your computer via the appropriate interface (e.g., USB).
+3. Ensure that the necessary drivers are installed if required by your operating system.
+4. Run the executable file to start using TempTamer immediately.
 
-### Procedure
+## Protocol/Interface
 
-1. **Connect your Microcontroller**: Connect your Arduino or ESP32 microcontroller to your computer using the USB cable.
+The TempTamer Hardware Module communicates with the system using a serial interface. It accepts commands in a specific format to adjust fan speeds based on temperature readings received from the system.
 
-2. **Open Arduino IDE or ESP-IDF Terminal**: Open the Arduino IDE or the ESP-IDF terminal, depending on your microcontroller.
+### Command Format:
 
-3. **Select the Correct Port**: In the Arduino IDE, navigate to `Tools > Port` and select the appropriate port for your microcontroller.
+```
+{fan_speed_command}
+```
 
-4. **Enter Bootloader Mode (for ESP32 Only)**: If you're flashing a .bin file onto an ESP32 microcontroller, you might need to enter bootloader mode. Usually, this involves holding down the BOOT button while resetting the device.
+- `fan_speed_command`: A command to set the fan speed, formatted as `{fan_bits=fan_speed}`.
 
-5. **Flash the .bin File**:
+Example:
+```
+{110=75}
+```
+This command sets the fan speed of the fans associated with the bit pattern `110` to 75%.
 
-   - **Arduino IDE**:
-     1. In the Arduino IDE, navigate to `Sketch > Include Library > Add .ZIP Library`.
-     2. Select the .zip file containing the .bin file you want to flash.
-     3. Once the library is added, navigate to `File > Examples` and select the library you just added.
-     4. Open the example sketch and verify/upload it to your microcontroller.
+## Build from Source
 
-   - **ESP-IDF Terminal**:
-     1. Navigate to the directory containing the .bin file using the terminal.
-     2. Use the `esptool.py` utility to flash the .bin file onto your ESP32 microcontroller. The command typically looks like this:
+If you prefer to build TempTamer Hardware Module from source:
 
-      ```
-      esptool.py --chip esp32 --port /dev/ttyUSB0 write_flash -z 0x1000 your_firmware.bin
-      ```
+1. Clone the TempTamer repository to your local machine.
+2. Navigate to the `arduino` directory.
+3. Follow the build instructions provided in the README or build script.
+4. Once built, connect the hardware module to your computer and proceed with configuration and usage.
 
-      Replace `/dev/ttyUSB0` with the appropriate port for your microcontroller, and `your_firmware.bin` with the name of your .bin file.
+...
 
-6. **Verify**: Once the flashing process is complete, verify that the .bin file has been successfully flashed onto your microcontroller.
+## Different Hardware Examples
 
-7. **Reset (if necessary)**: Reset your microcontroller if required to start running the flashed program.
+TempTamer Hardware Module can be adapted to various hardware configurations and interfaces. Here are some examples:
 
-Following these steps should allow you to successfully flash .bin files onto your Arduino or ESP32 microcontroller. If you encounter any issues, refer to the troubleshooting section or consult the documentation specific to your device or development environment.
+### Example 1: Arduino-based Module
+
+- **Hardware**: Arduino Uno
+- **Interface**: USB Serial
+- **Components**: PWM-compatible fans, temperature probe (optional)
+- **Configuration**: Upload the provided firmware to the Arduino Uno board.
+- **Usage**: Connect fans and temperature probe to the Arduino, and control fan speeds using the serial interface.
+
+### Example 2: ESP32 HAT
+
+- **Hardware**: ESP32/ESP-01
+- **Interface**: USB Serial
+- **Components**: PWM-compatible fans, temperature probe (optional)
+- **Configuration**: Upload the provided firmware to the ESP board.
+- **Usage**: Connect fans and temperature probe to the ESP, and control fan speeds using the serial interface.
+
+### Example 3: TempTamer PCB HAT
+
+- **Hardware**: Custom PCB with hat for arduino/esp
+- **Interface**: USB Serial
+- **Components**: PWM-compatible fans, temperature probe (optional)
+- **Configuration**: Download and manufacture the PCB via JLC-PCB or simmialr, program the microcontroller.
+- **Usage**: Connect fans, power and temperature probe to the custom PCB HAT with Arduino or ESP32. 
+
+---
+
+This README provides an overview of the TempTamer Hardware Module, including quick start instructions, protocol/interface details, building from source, and examples of different hardware configurations. Choose the setup that best fits your requirements and hardware expertise.

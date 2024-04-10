@@ -1,46 +1,61 @@
-### Linux Bash Script
+# TempTamer Shell Script
 
-TempTamer comes with a companion linux script for convenient monitoring and control of CPU temperatures, fan and clock speeds.
-#### Features:
-1. **Real-Time Monitoring:** Monitor CPU temperatures, clock and fan speeds in real-time.
-2. **Manual Control:** Adjust fan speeds and CPU clock manually to meet specific cooling requirements.
-3. **Automatic Optimization:** Let TempTamer automatically optimize settings based on temperature readings.
-4. **Email Notifications:** Receive email notifications when critical temperatures are reached, ensuring timely intervention.
-5. **Safety Features:** The app includes safety features to prevent hardware damage due to inadequate cooling or incorrect configurations.
+## About
 
-To use the Serial PC app:
+TempTamer Shell Script provides dynamic temperature-based control over CPU frequencies and fan speeds on Linux systems. It regulates CPU performance to maintain optimal temperatures, ensuring system stability and longevity.
 
-1. **Launch TempTamer on your computer:** Ensure TempTamer is running on your system.
-2. **Connect via Serial Communication:** Use serial communication software to establish a connection with TempTamer.
-3. **Monitor and Control:** Monitor CPU temperatures and fan speeds, and adjust settings as needed.
-4. **Stay Informed:** Stay informed about critical temperature events via email notifications.
+## Requirements
 
-### Fan Controller Module
+- Linux-based system
+- CPU temperature monitoring capabilities
+- Optional: TempTamer Fan Controller Module for fan speed control
 
-The TempTamer Fan Controller Module is a crucial component of the TempTamer system, responsible for managing fan speeds based on user commands received via serial communication. Below is an overview of the functionalities provided by this part of the application:
+## Configuration
 
-#### Functionality Overview
+1. Clone the TempTamer repository to your local machine.
+2. Open the shell script (`temptamer.sh`) in a text editor.
+3. Configure the script variables to match your system setup and preferences.
+4. Save the changes to the script.
 
-1. **`void setFanSpeed(int fanIndex, int percent)`:**
-   - Sets the speed of a single fan based on the provided percentage.
-     - `fanIndex`: Index of the fan whose speed needs to be set.
-     - `percent`: Speed percentage (0-100) to set for the fan.
+## Configuration with Hardware Module
 
-2. **`void setMultiFanSpeed(long fanBits, int percent)`:**
-   - Sets the speed of multiple fans based on a bitmask and the provided percentage.
-     - `fanBits`: Bitmask representing which fans to set the speed for.
-     - `percent`: Speed percentage (0-100) to set for the selected fans.
+If you have the TempTamer Fan Controller Module installed:
 
-3. **`void initFans(int percent)`:**
-   - Initializes the fans, setting them to a specified initial speed percentage.
-     - `percent`: Initial speed percentage (0-100) for all fans.
+1. Follow the hardware setup instructions provided with the module.
+2. Ensure that the serial device path (`fanSerialDevice`) in the configuration file points to the correct device.
+3. Specify the number of fans (`noOfFans`) connected to the module.
+4. Adjust the fan speed curves in the configuration file to match your cooling requirements.
 
-4. **`boolean handleFanCommand(String data)`:**
-   - Handles a single fan command received via serial communication.
-     - `data`: String containing the fan command in the format "{fanIndex},{fanSpeed}".
-   - `true` if the command was successfully processed, `false` otherwise.
+## Starting + Command Line Options
 
-5. **`boolean handleMultiFanCommand(String data)`:**
-   - Handles a multi-fan command received via serial communication.
-     - `data`: String containing the multi-fan command in the format "{fanBits=FanSpeed,...}".
-   - `true` if the command was successfully processed, `false` otherwise.
+To start TempTamer:
+
+1. Open a terminal window.
+2. Navigate to the directory containing the script (`temptamer.sh`).
+3. Run the script using the following command:
+
+```bash
+./temptamer.sh -t SECONDS_TO_RUN -c CONFIG_FILE
+```
+
+Command Line Options:
+
+- `-t SECONDS_TO_RUN`: Specify the duration (in seconds) for which TempTamer will run.
+- `-c CONFIG_FILE`: Specify the path to the configuration file.
+
+Example usage:
+
+```bash
+./temptamer.sh -t 3600 -c config.txt
+```
+
+This command starts TempTamer, running for 3600 seconds (1 hour), using the configuration specified in `config.txt`.
+
+## Safety Considerations
+
+- Ensure that the hardware module (if used) is correctly connected and configured to prevent damage to your system.
+- Monitor system behavior closely, especially when adjusting fan speed curves and temperature thresholds.
+
+## Support
+
+For any questions, issues, or feedback, please open an issue on GitHub. We're here to help and continuously improve TempTamer. Happy temp taming!
