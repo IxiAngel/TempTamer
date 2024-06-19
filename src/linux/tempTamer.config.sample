@@ -16,6 +16,9 @@ fanSerialDevice=/dev/ttyUSB0
 # How many fans are attached to the Fan Controller Module.
 noOfFans=6
 
+# How many processors/nodes does the system have
+noOfNodes=1
+
 # Command to read the CPU1 temperature with.
 getCpu1TempCmd=</sys/class/thermal/thermal_zone1/temp
 

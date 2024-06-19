@@ -25,13 +25,14 @@
 VERSION="1.0"
 
 # Set with argument -t
-MAX_RUNNING_TIME=999999999999
+MAX_RUNNING_TIME=0
 
 # Set with argument -c
 CONFIG_FILE=""
 
 # Below variables are set with configuration file
 FAN_SERIAL_DEV=""
+NO_OF_NODES=1
 NO_OF_FANS=0
 CURVES=()
 
@@ -60,14 +61,34 @@ RETURNED_FAN_STATE=()
 
 FANS_UPDATED=0
 
+showCurrentCoreFrequencies()
+{
+  echo "Current core frequencies:"
+  cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq | sort | uniq -c
+  echo
+}
+
+setScalingMaxFreq()
+{
+  echo Setting frequencies of Node$1 to $2
+
+  for dir in /sys/devices/system/node/node$1/cpu*/cpufreq;
+  do
+    echo "$2" > $dir/scaling_max_freq
+  done
+}
+
 setFrequency()
 {
   if [ $LAST_FREQ -ne $1 ]; then
     if [ $LAST_FREQ -gt $1 ] || [ $(($SECONDS - $LAST_FREQ_UPDATE)) -ge $2 ]; then
       LAST_FREQ=$1
       LAST_FREQ_UPDATE=$(($MIN_COOL_DOWN + $SECONDS - $2))
-      ./setCpuFrequency.sh 0 $1
-      ./setCpuFrequency.sh 1 $1
+      local i=0
+      while [ $i -lt $NO_OF_NODES ]; do
+        setScalingMaxFreq $i $1
+        i=$(($i + 1))
+      done
     fi
   fi
 }
@@ -253,6 +274,11 @@ readConfigFile()
       if [ "$NO_OF_FANS" == "" ]; then
         help "noOfFans value '$value' is invalid."
       fi
+    elif [ "$key" == "noOfNodes" ]; then
+      NO_OF_NODES=$value
+      if [ "$NO_OF_NODES" == "" ]; then
+        help "noOfNodes value '$value' is invalid."
+      fi
     elif [ "$key" == "getCpu1TempCmd" ]; then
       GET_CPU1_TEMP_CMD=$value
     elif [ "$key" == "getCpu2TempCmd" ]; then
@@ -365,6 +391,9 @@ helpText()
   echo "  # How many fans are attached to the Fan Controller Module."
   echo "  noOfFans=6"
   echo
+  echo "  # How many processors/nodes does the system have"
+  echo "  noOfNodes=1"
+  echo
   echo "  # Command to read the CPU1 temperature with."
   echo "  getCpu1TempCmd=</sys/class/thermal/thermal_zone1/temp"
   echo
@@ -420,6 +449,7 @@ init()
   echo "E-Mail Address: $EMAIL"
   echo "Fan Controller Module Serial Device: $FAN_SERIAL_DEV"
   echo "Number of fans: $NO_OF_FANS"
+  echo "Number of nodes: $NO_OF_NODES"
   echo "Get CPU1 Temperature Command: $GET_CPU1_TEMP_CMD"
   echo "Get CPU2 Temperature Command: $GET_CPU2_TEMP_CMD"
   echo "CPU Temp Divisor: $CPU_TEMP_DIVISOR"
@@ -455,87 +485,80 @@ outputArray()
   done
 }
 
-showCurrentCoreFrequencies()
-{
-  echo "Current core frequencies:"
-  cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq | sort | uniq -c
-  echo
-}
-
 startMonitor()
 {
   init "$@"
 
   while [ 1 -eq 1 ]; do
-  local temp1=$(($(eval "$GET_CPU1_TEMP_CMD") / $CPU_TEMP_DIVISOR))
-  local temp2=$(($(eval "$GET_CPU2_TEMP_CMD") / $CPU_TEMP_DIVISOR))
+    local temp1=$(($(eval "$GET_CPU1_TEMP_CMD") / $CPU_TEMP_DIVISOR))
+    local temp2=$(($(eval "$GET_CPU2_TEMP_CMD") / $CPU_TEMP_DIVISOR))
   
-  local cpuTemp=$temp1
-  if [ $temp2 -gt $cpuTemp ]; then
-    cpuTemp=$temp2
-  fi
-
-  local curFreq=$LAST_FREQ
-
-  local prevCurveFanStates=()
-  local updatedFans=0
-  local curveFound=0
-  FANS_UPDATED=0
-
-  local curve
-  for curve in ${CURVES[@]}; do
-    local curveTemp=${curve%%,*}
-    
-    local curveFreq=${curve#*,}
-    curveFreq=${curveFreq%%,*}
-    
-    local curveTimeout=${curve#*,*,}
-    curveTimeout=${curveTimeout%%,*}
-    
-    local curveSpeeds=${curve#*,*,*,}
-
-    setAllFans $cpuTemp $curveTemp $curveSpeeds $curveTimeout $curveFound "${prevCurveFanStates[@]}"
-    updateFanState $curveTemp $curveSpeeds $curveFound "${prevCurveFanStates[@]}"
-    prevCurveFanStates=("${RETURNED_FAN_STATE[@]}")
-
-    if [ $cpuTemp -lt $curveTemp ]; then
-      if [ $LAST_FREQ -lt $curveFreq ]; then
-        setFrequency $curveFreq $curveTimeout
-      fi
-    else
-      if [ $curveFound -eq 0 ]; then
-        setFrequency $curveFreq $curveTimeout
-        curveFound=$curveTemp
-      fi
+    local cpuTemp=$temp1
+    if [ $temp2 -gt $cpuTemp ]; then
+      cpuTemp=$temp2
     fi
-  done
 
-  local changed=0
-  if [ $curFreq -ne $LAST_FREQ ]; then
-    changed=1
-    echo "CPU Frequency changed at Temp1: $temp1°C, Temp2: $temp2°C"
-    showCurrentCoreFrequencies
-    echo
-  fi
+    local curFreq=$LAST_FREQ
 
-  if [ $FANS_UPDATED -eq 1 ]; then
-    changed=1
-    printf "Fan Speeds changed at Temp1: $temp1°C, Temp2: $temp2°C, Fan States: "
-    outputArray "${FAN_STATE[@]}"
-    echo
-  fi
+    local prevCurveFanStates=()
+    local updatedFans=0
+    local curveFound=0
+    FANS_UPDATED=0
 
-  if [ "$EMAIL" != "" ] && [ $cpuTemp -ge $CRITICAL_TEMPERATURE ]; then
-    echo "Critical temperature reached $cpuTemp°C on '$IDENTIFIER'." | mail -s "[$IDENTIFIER] Critical Temperature" $EMAIL &
-  fi
+    local curve
+    for curve in ${CURVES[@]}; do
+      local curveTemp=${curve%%,*}
+    
+      local curveFreq=${curve#*,}
+      curveFreq=${curveFreq%%,*}
+    
+      local curveTimeout=${curve#*,*,}
+      curveTimeout=${curveTimeout%%,*}
+    
+      local curveSpeeds=${curve#*,*,*,}
 
-  if [ $(($START_TIME + $MAX_RUNNING_TIME)) -lt $SECONDS ]; then
-    break
-  fi
+      setAllFans $cpuTemp $curveTemp $curveSpeeds $curveTimeout $curveFound "${prevCurveFanStates[@]}"
+      updateFanState $curveTemp $curveSpeeds $curveFound "${prevCurveFanStates[@]}"
+      prevCurveFanStates=("${RETURNED_FAN_STATE[@]}")
 
-  if [ $changed -eq 0 ]; then
-    sleep 0.3
-  fi
+      if [ $cpuTemp -lt $curveTemp ]; then
+        if [ $LAST_FREQ -lt $curveFreq ]; then
+          setFrequency $curveFreq $curveTimeout
+        fi
+      else
+        if [ $curveFound -eq 0 ]; then
+          setFrequency $curveFreq $curveTimeout
+          curveFound=$curveTemp
+        fi
+      fi
+    done
+
+    local changed=0
+    if [ $curFreq -ne $LAST_FREQ ]; then
+      changed=1
+      echo "CPU Frequency changed at Temp1: $temp1°C, Temp2: $temp2°C"
+      showCurrentCoreFrequencies
+      echo
+    fi
+
+    if [ $FANS_UPDATED -eq 1 ]; then
+      changed=1
+      printf "Fan Speeds changed at Temp1: $temp1°C, Temp2: $temp2°C, Fan States: "
+      outputArray "${FAN_STATE[@]}"
+      echo
+    fi
+
+    if [ "$EMAIL" != "" ] && [ $cpuTemp -ge $CRITICAL_TEMPERATURE ]; then
+      echo "Critical temperature reached $cpuTemp°C on '$IDENTIFIER'." | mail -s "[$IDENTIFIER] Critical Temperature" $EMAIL &
+    fi
+
+    if [ $MAX_RUNNING_TIME -ne 0 ] && [ $(($START_TIME + $MAX_RUNNING_TIME)) -lt $SECONDS ]; then
+      break
+    fi
+
+    if [ $changed -eq 0 ]; then
+      sleep 0.3
+    fi
   done
 }
 

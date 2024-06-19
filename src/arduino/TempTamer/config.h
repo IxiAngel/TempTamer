@@ -28,7 +28,7 @@ int EMERGENCY_TIMEOUT = 60;
 
 // (Optional) Temperature sensor port. Use -1 to disable.
 // OneWire/DallasTemperature (i.e. DS18B20) is supported.
-int TEMP_SENSOR_PIN = GPIO_NUM_13;
+int TEMP_SENSOR_PIN = -1;
 // (Optional) Set fans to max speed if temperature of the sensor drops to specified value or below in Celsius.
 const int TEMP_SENSOR_MIN_TEMP = 0;
 // (Optional) Set fans to TEMP_SENSOR_MAX_TEMP_FAN_SPEED speed if temperature of the sensor reaches or is higher than the specified value in Celsius.

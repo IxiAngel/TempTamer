@@ -85,7 +85,7 @@ void help()
 	Serial.println("Example usage: \"{command,param1,param2,...}\".");
 	Serial.println("Commands:");
 	Serial.println(" {0,fanIndex,fanSpeed} - Sets speed of a single fan.");
-	Serial.println(" {1,fanBits} - Sets speed of multiple fans.");
+	Serial.println(" {1,fanBits=fanSpeed,...} - Sets speed of multiple fans.");
 	Serial.println(" {2} - Returns temperature from sensor.");
 	Serial.println(" {setConfig,optionName,value} - Sets configuration option (tempSensorPin, tempSensorMaxTemp, tempSensorMaxTempFanSpeed, minFanSpeed).");
 	Serial.println(" {reset} - Resets the fan controller.");
