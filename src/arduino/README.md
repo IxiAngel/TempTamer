@@ -26,13 +26,13 @@ The following boards are currently supported by TempTamer:
 ## Quick Start
 
 1. Download the GIT project and extract.
-2. Using ![VSCode](https://code.visualstudio.com/download) and ![PlatformIO](https://platformio.org/install/ide?install=vscode) import `platformio.ini` project file.
+2. Using [VSCode](https://code.visualstudio.com/download) and [PlatformIO](https://platformio.org/install/ide?install=vscode) import `platformio.ini` project file.
 3. Open PlatformIO.
 4. Choose your board in project configuration under "Generic Options" Default is set to `wemos_d1_mini32`.
 5. Connect the TempTamer Hardware Module (Arduino/ESP) to your computer via USB.
 6. Ensure that the necessary Arduino serial drivers (FTDI, cp210x..) are installed, if required by your operating system.
 7. Click PlatformIO: upload arrow or click `Project Tasks/General/Upload` button in the side platformIO menu.
-8. Run ![tempTamer.sh](src/linux/tempTamer.sh) after reading the TempTamer Shell Script ![Readme](src/linux/README.md).
+8. Run [tempTamer.sh](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/tempTamer.sh) after reading the TempTamer Shell Script [Readme](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/README.md).
 
 ## Protocol and Interface
 
@@ -75,7 +75,8 @@ If you prefer to build TempTamer Hardware Module from source:
 
 ## Different Hardware Examples
 
-TempTamer Hardware Module can be adapted to various hardware configurations and interfaces. ![Here](src/arduino/TempTamer_Circuit_Schematic.png) are some examples:
+TempTamer Hardware Module can be adapted to various hardware configurations and interfaces. Here are some examples:
+![](TempTamer_Circuit_Schematic.png)
 
 ### Example 1: Arduino-based Module
 
@@ -83,7 +84,7 @@ TempTamer Hardware Module can be adapted to various hardware configurations and 
 - **Interface**: USB Serial
 - **Components**: PWM-compatible fans, temperature probe (optional)
 - **Configuration**: Upload the provided firmware to the Arduino Uno board.
-- **Usage**: Connect fans and temperature probe to the Arduino, and control fan speeds using the serial interface. See [Schematic](src/arduino/TempTamer_Circuit_Schematic.png).
+- **Usage**: Connect fans and temperature probe to the Arduino, and control fan speeds using the serial interface. See [Schematic](TempTamer_Circuit_Schematic.png).
 
 ### Example 2: ESP32 HAT
 
