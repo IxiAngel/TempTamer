@@ -41,10 +41,11 @@ If you prefer to build and upload TempTamer usind [Arduino IDE](https://www.ardu
 2. Navigate to the `arduino/TempTamer` directory.
 3. Open the `TempTamer.ino` file with Arduino Studio.
 4. Edit the `config.h` file to configure TempTamer firmware. Adjust fan ports, initial fan speed, minimum fan speed, and temperature sensor settings as needed.
-5. Select the correct board and port.
-6. Press `Verify/Compile` or `Upload` to the board.
-7. Connect the TempTamer Hardware Module (Arduino/ESP) to your computer via USB.
-8. Run [tempTamer.sh](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/tempTamer.sh) after reading the TempTamer Shell Script [Readme](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/README.md).
+5. Add OneWire and DallasTemperature libraries.
+6. Select the correct board and port.
+7. Press `Verify/Compile` or `Upload` to the board.
+8. Connect the TempTamer Hardware Module (Arduino/ESP) to your computer via USB.
+9. Run [tempTamer.sh](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/tempTamer.sh) after reading the TempTamer Shell Script [Readme](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/README.md).
 
 ## Protocol and Interface
 
