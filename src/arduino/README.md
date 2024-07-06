@@ -23,15 +23,27 @@ The following boards are currently supported by TempTamer:
 - ESP8266
 - ...
 
-## Quick Start
+## Quick Start using PlatformIO
 
-1. Download the GIT project and extract.
+1. Clone the TempTamer repository to your local machine.
 2. Using [VSCode](https://code.visualstudio.com/download) and [PlatformIO](https://platformio.org/install/ide?install=vscode) import `platformio.ini` project file.
 3. Open PlatformIO.
 4. Choose your board in project configuration under "Generic Options" Default is set to `wemos_d1_mini32`.
-5. Connect the TempTamer Hardware Module (Arduino/ESP) to your computer via USB.
-6. Ensure that the necessary Arduino serial drivers (FTDI, cp210x..) are installed, if required by your operating system.
-7. Click PlatformIO: upload arrow or click `Project Tasks/General/Upload` button in the side platformIO menu.
+5. Edit the `config.h` file to configure TempTamer firmware. Adjust fan ports, initial fan speed, minimum fan speed, and temperature sensor settings as needed.
+6. Connect the TempTamer Hardware Module (Arduino/ESP) to your computer via USB.
+7. Ensure that the necessary Arduino serial drivers (FTDI, cp210x..) are installed, if required by your operating system.
+8. Click PlatformIO: upload arrow or click `Project Tasks/General/Upload` button in the side platformIO menu.
+9. Run [tempTamer.sh](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/tempTamer.sh) after reading the TempTamer Shell Script [Readme](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/README.md).
+
+If you prefer to build and upload TempTamer usind [Arduino IDE](https://www.arduino.cc/en/software):
+
+1. Clone the TempTamer repository to your local machine.
+2. Navigate to the `arduino/TempTamer` directory.
+3. Open the `TempTamer.ino` file with Arduino Studio.
+4. Edit the `config.h` file to configure TempTamer firmware. Adjust fan ports, initial fan speed, minimum fan speed, and temperature sensor settings as needed.
+5. Select the correct board and port.
+6. Press `Verify/Compile` or `Upload` to the board.
+7. Connect the TempTamer Hardware Module (Arduino/ESP) to your computer via USB.
 8. Run [tempTamer.sh](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/tempTamer.sh) after reading the TempTamer Shell Script [Readme](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/README.md).
 
 ## Protocol and Interface
@@ -60,18 +72,6 @@ Example:
 ```
 
 This command sets the fan speed of the fans associated with the bit pattern `3` (first two fans) to 75%.
-
-## Building from Source
-
-If you prefer to build TempTamer Hardware Module from source:
-
-1. Clone the TempTamer repository to your local machine.
-2. Navigate to the `arduino/TempTamer` directory.
-3. Open the `TempTamer.ino` file with Arduino Studio.
-4. Edit the `config.h` file to configure TempTamer firmware. Adjust fan ports, initial fan speed, minimum fan speed, and temperature sensor settings as needed.
-5. Select the correct board.
-6. Press `Verify/Compile` or `Upload` to the board.
-7. Once built, connect the hardware module to your computer and proceed with configuration and usage.
 
 ## Different Hardware Examples
 
