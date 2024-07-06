@@ -3,13 +3,13 @@
 ## About
 
 TempTamer Shell Script provides dynamic temperature-based control over CPU frequencies and fan speeds on Linux systems.
-It regulates CPU performance to maintain optimal temperatures, ensuring system stability and longevity.
+By regulating CPU performance to maintain optimal temperatures, it ensures system stability and longevity.
 
 ## Requirements
 
-- Linux-based system
+- A Linux-based system
 - CPU temperature monitoring capabilities
-- Optional: TempTamer Fan Controller Module for fan speed control
+- Optional: The TempTamer Fan Controller Module for fan speed control
 
 ## Configuration
 
@@ -49,9 +49,23 @@ Example usage:
 
 This command starts TempTamer, running for 62 seconds, using the configuration specified in `config.txt`.
 
+
+## Cron Job Entry
+
+To run TempTamer automatically at regular intervals, you can use a cron job. Here's an example crontab entry:
+```
+* * * * * /bin/sh /usr/local/bin/tempTamer.sh -t 62 -c /usr/local/etc/tempTamer.config > /dev/null
+```
+This will run the script every minute and execute it for 62 seconds (as specified with the `-t` parameter). Verify that you have
+correctly entered the paths for `tempTamer.sh` and `tempTamer.config` files.
+
+
 ## Safety Considerations
 
-**!!! You are using this software at your own risk. You can damage your hardware if the module is wired or configured incorrectly or if fan speeds are set too low. !!!**
+**!!! WARNING: You are using this software at your own risk. Improperly configured or wired fan controller modules can damage your
+hardware. Setting fan speeds too low can lead to overheating, which can also cause damage to your hardware. !!!**
+
+To ensure safe operation:
 
 - Ensure that the fan controller module is correctly connected and configured to avoid damaging hardware due to inadequate cooling.
 - Use CAUTION when defining fan speed curves and temperature thresholds to prevent overheating and oscillations.
@@ -65,3 +79,6 @@ Whether you're a seasoned developer or a newcomer, we appreciate all contributio
 ## Support
 
 For any questions, issues, or feedback, please open an issue on GitHub.
+
+---
+Copyright (c) 2024 TempTamer Developers

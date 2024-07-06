@@ -2,37 +2,40 @@
 
 ## About
 
-The TempTamer Hardware Module complements the TempTamer Shell Script, providing fan speed control capabilities based on real-time temperature readings.
-With this module, you can efficiently manage CPU temperatures and fan speeds for optimal system performance and reliability.
+The TempTamer Hardware Module complements the TempTamer Shell Script by providing fan speed control capabilities based on real-time
+temperature readings. This module enables you to efficiently manage temperatures and fan speeds for optimal system performance and reliability.
 
-To build and upload TempTamer you will use one of these tools:
+To build and upload TempTamer, you will use one of these tools:
 
-    -Arduino IDE
-    -VSCode with PlatformioIO
+- Arduino IDE
+- VSCode with PlatformIO
 
-TempTamer is optimized to build with the PlatformIO IDE extension for Visual Studio Code. You can still build TempTamer with Arduino IDE.
+TempTamer is optimized to build with the PlatformIO IDE extension for Visual Studio Code. You can also build TempTamer using the Arduino IDE.
 
 ### Supported Boards
+
+The following boards are currently supported by TempTamer:
+
 - Arduino Uno
 - Arduino Nano
 - Arduino Mega
 - ESP32
 - ESP8266
-- More to be added.
+- More to be added in the future
 
-## Quick Prep/Start from Pre-built Binaries
+## Quick Start: Using Pre-built Binaries
 
 1. Download the pre-built binaries for your platform from the TempTamer GitHub releases page.
-2. Connect the TempTamer Hardware Module to your computer via the appropriate interface (e.g. USB).
+2. Connect the TempTamer Hardware Module to your computer via the appropriate interface (e.g., USB).
 3. Ensure that the necessary drivers are installed, if required by your operating system.
 4. Run the executable file to start using TempTamer immediately.
 
-## Protocol/Interface
+## Protocol and Interface
 
-The TempTamer Hardware Module communicates with the system using a serial interface.
-It accepts commands in a specific format to adjust fan speeds based on temperature readings received from the system.
+The TempTamer Hardware Module communicates with the system using a serial interface. It accepts commands in a specific format to adjust
+fan speeds based on temperature readings received from the system.
 
-### Command Format:
+### Command Format
 
 ```
 {command,parameter1,parameter2,...}
@@ -40,30 +43,31 @@ It accepts commands in a specific format to adjust fan speeds based on temperatu
 
 ### Commands
 
-- `{0,fanIndex,fanSpeed}`: Sets speed of a single fan.
-- `{1,fanBits=fanSpeed,...}`: Sets speed of multiple fans.
-- `{2}`: Returns temperature from temperature sensor.
+- `{0,fanIndex,fanSpeed}`: Sets speed of a single fan by fan index.
+- `{1,fanBits=fanSpeed,...}`: Sets speed of multiple fans by fan bit index.
+- `{2}`: Returns temperature from the temperature sensor.
 - `{setConfig,optionName,value}`: Sets configuration option (tempSensorPin, tempSensorMaxTemp, tempSensorMaxTempFanSpeed, minFanSpeed).
 - `{reset}`: Resets the fan controller.
 
 Example:
+
 ```
 {1,3=75}
 ```
 
-This command sets the fan speed of the fans associated with the bit pattern `3 (11b)` to 75%.
+This command sets the fan speed of the fans associated with the bit pattern `3` (first two fans) to 75%.
 
-## Build from Source
+## Building from Source
 
 If you prefer to build TempTamer Hardware Module from source:
+
 1. Clone the TempTamer repository to your local machine.
 2. Navigate to the `arduino/TempTamer` directory.
-3. Open `TempTamer.ino` file with Arduino Studio.
-4. Edit `config.h` file, to configure TempTamer firmware. Adjust fan ports, initial fan speed, minimum fan speed, and temperature sensor settings as needed.
-5. Select the correct Board.
+3. Open the `TempTamer.ino` file with Arduino Studio.
+4. Edit the `config.h` file to configure TempTamer firmware. Adjust fan ports, initial fan speed, minimum fan speed, and temperature sensor settings as needed.
+5. Select the correct board.
 6. Press `Verify/Compile` or `Upload` to the board.
 7. Once built, connect the hardware module to your computer and proceed with configuration and usage.
-
 
 ## Different Hardware Examples
 
@@ -87,15 +91,19 @@ TempTamer Hardware Module can be adapted to various hardware configurations and 
 
 ### Example 3: TempTamer PCB HAT
 
-- **Hardware**: Custom PCB with hat for arduino/esp
+- **Hardware**: Custom PCB with hat for Arduino/ESP
 - **Interface**: USB Serial
 - **Components**: PWM-compatible fans, temperature probe (optional)
 - **Configuration**: Download and manufacture the PCB via JLC-PCB or similar, program the microcontroller.
-- **Usage**: Connect fans, power and temperature probe to the custom PCB HAT with Arduino or ESP32. 
+- **Usage**: Connect fans, power, and temperature probe to the custom PCB HAT with Arduino or ESP32.
+
 
 ## Safety Considerations
 
-**!!! You are using this software at your own risk. You can damage your hardware if the module is wired or configured incorrectly or if fan speeds are set too low. !!!**
+**!!! WARNING: You are using this software at your own risk. Improperly configured or wired fan controller modules can damage your
+hardware. Setting fan speeds too low can lead to overheating, which can also cause damage to your hardware. !!!**
+
+To ensure safe operation:
 
 - Ensure that the fan controller module is correctly connected and configured to avoid damaging hardware due to inadequate cooling.
 - Use CAUTION when defining fan speed curves and temperature thresholds to prevent overheating and oscillations.
@@ -109,3 +117,6 @@ Whether you're a seasoned developer or a newcomer, we appreciate all contributio
 ## Support
 
 For any questions, issues, or feedback, please open an issue on GitHub.
+
+---
+Copyright (c) 2024 TempTamer Developers
