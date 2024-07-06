@@ -7,7 +7,7 @@ With this module, you can efficiently manage CPU temperatures and fan speeds for
 
 To build and upload TempTamer you will use one of these tools:
 
-    -The free Arduino IDE
+    -Arduino IDE
     -VSCode with PlatformioIO
 
 TempTamer is optimized to build with the PlatformIO IDE extension for Visual Studio Code. You can still build TempTamer with Arduino IDE.
