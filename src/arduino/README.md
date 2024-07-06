@@ -12,6 +12,14 @@ To build and upload TempTamer you will use one of these tools:
 
 TempTamer is optimized to build with the PlatformIO IDE extension for Visual Studio Code. You can still build TempTamer with Arduino IDE.
 
+### Supported Boards
+- Arduino Uno
+- Arduino Nano
+- Arduino Mega
+- ESP32
+- ESP8266
+- More to be added.
+
 ## Quick Prep/Start from Pre-built Binaries
 
 1. Download the pre-built binaries for your platform from the TempTamer GitHub releases page.
