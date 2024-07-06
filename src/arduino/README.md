@@ -5,6 +5,13 @@
 The TempTamer Hardware Module complements the TempTamer Shell Script, providing fan speed control capabilities based on real-time temperature readings.
 With this module, you can efficiently manage CPU temperatures and fan speeds for optimal system performance and reliability.
 
+To build and upload TempTamer you will use one of these tools:
+
+    -The free Arduino IDE
+    -VSCode with PlatformioIO
+
+TempTamer is optimized to build with the PlatformIO IDE extension for Visual Studio Code. You can still build TempTamer with Arduino IDE.
+
 ## Quick Prep/Start from Pre-built Binaries
 
 1. Download the pre-built binaries for your platform from the TempTamer GitHub releases page.
