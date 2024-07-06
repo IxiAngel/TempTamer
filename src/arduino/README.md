@@ -35,7 +35,7 @@ The following boards are currently supported by TempTamer:
 8. Click PlatformIO: upload arrow or click `Project Tasks/General/Upload` button in the side platformIO menu.
 9. Run [tempTamer.sh](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/tempTamer.sh) after reading the TempTamer Shell Script [Readme](https://github.com/IxiAngel/TempTamer/blob/main/src/linux/README.md).
 
-If you prefer to build and upload TempTamer usind [Arduino IDE](https://www.arduino.cc/en/software):
+If you prefer to build and upload TempTamer using [Arduino IDE](https://www.arduino.cc/en/software):
 
 1. Clone the TempTamer repository to your local machine.
 2. Navigate to the `arduino/TempTamer` directory.
