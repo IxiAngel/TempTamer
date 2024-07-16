@@ -40,7 +40,7 @@ For more information about the TempTamer bash script, please see [src/linux/READ
 
 ### Hardware Example
 
-![](TempTamer_Circuit_Schematic.png)
+![](Shematics/TempTamer_Circuit_Schematic.png)
 
 For more information about TempTamer Hardware Module, please see [src/arduino/README.md](src/arduino/README.md).
 
