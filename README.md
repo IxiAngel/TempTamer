@@ -38,6 +38,10 @@ For more information about the TempTamer bash script, please see [src/linux/READ
 4. Launch the serial monitor in the Arduino IDE or any serial communication software.
 5. Send commands in the format `{command,param1,param2,...}` to control fan speeds and retrieve temperature readings.
 
+### Hardware Example
+
+![](TempTamer_Circuit_Schematic.png)
+
 For more information about TempTamer Hardware Module, please see [src/arduino/README.md](src/arduino/README.md).
 
 ## Safety Considerations
