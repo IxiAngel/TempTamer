@@ -77,7 +77,7 @@ This command sets the fan speed of the fans associated with the bit pattern `3` 
 ## Different Hardware Examples
 
 TempTamer Hardware Module can be adapted to various hardware configurations and interfaces. Here are some examples:
-![](Shematics/TempTamer_Circuit_Schematic.png)
+![](/Schematics/TempTamer_Circuit_Schematic.png)
 
 ### Example 1: Arduino-based Module
 
