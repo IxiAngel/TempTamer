@@ -15,9 +15,6 @@
 //Only ESP supports LEDC. Disable if building for Arduino AVR targets.
 #define USE_LEDC
 
-//Only ESP supports software reset. (Arduino supports only jumping to addr 0)
-//#define ESP32
-
 // Fan ports to use.
 const int FANS[6] = { 2, 3, 4, 6, 8, 9 };
 
