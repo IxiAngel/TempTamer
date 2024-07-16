@@ -9,6 +9,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // MIT License for more details.
 
+#include <Arduino.h>
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
@@ -69,7 +70,7 @@ String readSerialData(int maxLength = 100)
 	return "";
 }
 
-boolean isValidInteger(String str)
+bool isValidInteger(String str)
 {
 	if (str == NULL || str.length() == 0)
 	{

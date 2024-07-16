@@ -12,10 +12,14 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
+//Only ESP supports LEDC. Disable if building for Arduino AVR targets.
 #define USE_LEDC
 
+//Only ESP supports software reset. (Arduino supports only jumping to addr 0)
+//#define ESP32
+
 // Fan ports to use.
-const int FANS[6] = { GPIO_NUM_19, GPIO_NUM_18, GPIO_NUM_5, GPIO_NUM_17, GPIO_NUM_16, GPIO_NUM_4 };
+const int FANS[6] = { 2, 3, 4, 6, 8, 9 };
 
 // Initial fan speed.
 const int INITIAL_FAN_SPEED = 50;
