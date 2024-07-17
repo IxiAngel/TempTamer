@@ -12,9 +12,10 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
-#define USE_LEDC
+//ESP detection for keeping the pin naming scheme cross-platform and usage of LEDC that Arduino AVR does not support.
+#include "platform.h"
 
-// Fan ports to use.
+// Fan ports and number of fans to use.
 const int FANS[6] = { GPIO_NUM_19, GPIO_NUM_18, GPIO_NUM_5, GPIO_NUM_17, GPIO_NUM_16, GPIO_NUM_4 };
 
 // Initial fan speed.

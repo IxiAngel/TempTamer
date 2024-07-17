@@ -11,15 +11,18 @@
 
 #include <OneWire.h>
 #include <DallasTemperature.h>
-
+#include <Bonezegei_Printf.h>
 #include "config.h"
 #include "utils.h"
 #include "fanController.h"
 #include "temperatureSensor.h"
 
+//param Stream
+Bonezegei_Printf debug(&Serial);
+
 #define LOOP_INTERVAL_MS 5
 
-boolean ledEnabled = false;
+bool ledEnabled = false;
 
 const String INIT_MESSAGE = "TempTamer Fan Controller Module v1.0";
 
@@ -54,10 +57,11 @@ void setup()
 	initBuiltInLed();
 	Serial.begin(115200);
 
+
 	Serial.println();
 	Serial.println(INIT_MESSAGE);
 
-	Serial.printf("Initial Fan Speed: %i, Min Fan Speed: %i, Temp Sensor Pin: %i, Temp Sensor Min: %i, Temp Sensor Max: %i.",
+	debug.printf("Initial Fan Speed: %i, Min Fan Speed: %i, Temp Sensor Pin: %i, Temp Sensor Min: %i, Temp Sensor Max: %i.",
 		INITIAL_FAN_SPEED,
 		MIN_FAN_SPEED,
 		TEMP_SENSOR_PIN,
@@ -70,6 +74,8 @@ void setup()
 #else
 	Serial.println("Warning: Using analogWrite(...). Please use \"#define USE_LEDC\" where possible.");
 #endif
+
+
 
 	help();
 
@@ -193,7 +199,9 @@ void processData(String data)
 
 	if (command == CMD_RESET)
 	{
-		ESP.restart();
+#ifdef ESP32
+	ESP.restart();
+#endif
 	}
 	else if (command == CMD_FAN)
 	{

@@ -9,6 +9,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // MIT License for more details.
 
+#include <Arduino.h>
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
@@ -16,6 +17,8 @@
 #define START_MARKER '{'
 #define END_MARKER '}'
 #define SPLIT_MARKER ","
+
+
 
 String readSerialData(int maxLength = 100)
 {
@@ -29,7 +32,7 @@ String readSerialData(int maxLength = 100)
 	unsigned long startTime = millis();
 	unsigned long totalDelayIterator = 0;
 
-	boolean error = false;
+	bool error = false;
 	while (Serial.available())
 	{
 		char c = Serial.read();
@@ -69,7 +72,7 @@ String readSerialData(int maxLength = 100)
 	return "";
 }
 
-boolean isValidInteger(String str)
+bool isValidInteger(String str)
 {
 	if (str == NULL || str.length() == 0)
 	{
