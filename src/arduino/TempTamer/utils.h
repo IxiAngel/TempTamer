@@ -18,6 +18,8 @@
 #define END_MARKER '}'
 #define SPLIT_MARKER ","
 
+
+
 String readSerialData(int maxLength = 100)
 {
 	// Wait in total 100ms (100 iterations with 1ms delay) for data in case of slow transfers.
@@ -30,7 +32,7 @@ String readSerialData(int maxLength = 100)
 	unsigned long startTime = millis();
 	unsigned long totalDelayIterator = 0;
 
-	boolean error = false;
+	bool error = false;
 	while (Serial.available())
 	{
 		char c = Serial.read();

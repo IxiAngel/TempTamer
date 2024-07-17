@@ -47,7 +47,7 @@ void initFans(int percent)
 	}
 }
 
-boolean handleFanCommand(String data)
+bool handleFanCommand(String data)
 {
 	String fanIndex = data.substring(data.indexOf(SPLIT_MARKER) + 1, data.lastIndexOf(SPLIT_MARKER));
 	if (!isValidInteger(fanIndex))
@@ -89,7 +89,7 @@ boolean handleFanCommand(String data)
 	return true;
 }
 
-boolean handleMultiFanCommand(String data)
+bool handleMultiFanCommand(String data)
 {
 	int startIndex = data.indexOf(SPLIT_MARKER) + 1;
   if (startIndex == 0)
